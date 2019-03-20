@@ -1,4 +1,4 @@
-package ru.vvvresearch.homework1.domain;
+package ru.vvvresearch.homework.domain;
 
 import com.opencsv.bean.AbstractCsvConverter;
 import com.opencsv.exceptions.CsvConstraintViolationException;

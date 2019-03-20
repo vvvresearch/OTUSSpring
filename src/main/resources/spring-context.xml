@@ -8,14 +8,26 @@
         <property name="location" value="/application.properties"/>
     </bean>
 
-    <bean id="questionDao" class="ru.vvvresearch.homework1.dao.QuestionDaoFromCSV">
+    <bean id="questionDao" class="ru.vvvresearch.homework.dao.QuestionDaoFromCSV">
         <constructor-arg value="${csvfilename.key}"/>
     </bean>
 
 
-    <bean id="questionService" class="ru.vvvresearch.homework1.service.ConsoleQuestionService">
+    <bean id="questionService" class="ru.vvvresearch.homework.service.QuestionServiceImpl">
         <constructor-arg name="question" ref="questionDao"/>
     </bean>
 
+    <bean id="personDao" class="ru.vvvresearch.homework.dao.PersonDaoFromStrings">
+
+    </bean>
+
+
+    <bean id="authService" class="ru.vvvresearch.homework.service.AuthServiceImpl">
+        <constructor-arg name="personDao" ref="personDao"/>
+    </bean>
+
+    <bean id="authController" class="ru.vvvresearch.homework.controller.ConsoleAuthController">
+        <constructor-arg name="authService" ref="authService"/>
+    </bean>
 
 </beans>

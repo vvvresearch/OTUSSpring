@@ -1,11 +1,11 @@
-package ru.vvvresearch.homework1;
+package ru.vvvresearch.homework;
 
 
 import org.junit.jupiter.api.Test;
 
 
 
-public class Homework1ApplicationTests {
+public class HomeworkApplicationTests {
 
     @Test
     public void contextLoads() {
