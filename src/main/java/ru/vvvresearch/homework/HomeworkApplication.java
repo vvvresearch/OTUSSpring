@@ -1,28 +1,23 @@
 package ru.vvvresearch.homework;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import ru.vvvresearch.homework.config.BeansConfiguration;
-import ru.vvvresearch.homework.controller.AuthController;
-import ru.vvvresearch.homework.controller.ConsoleQuestionController;
-import ru.vvvresearch.homework.controller.QuestionController;
-import ru.vvvresearch.homework.controller.ReportController;
-import ru.vvvresearch.homework.service.QuestionService;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import ru.vvvresearch.homework.runners.ConsoleRunner;
 
-@Configuration
-@ComponentScan
+
+@SpringBootApplication
 public class HomeworkApplication {
 
+
     public static void main(String[] args) {
-//        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/spring-context.xml");
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(BeansConfiguration.class);
-        AuthController authController = context.getBean(AuthController.class);
-        authController.askAuthData();
-        QuestionController questionController = context.getBean(QuestionController.class);
-        questionController.runTest();
-        ReportController reportController = context.getBean(ReportController.class);
-        reportController.showResult();
+
+        ConfigurableApplicationContext context = SpringApplication.run(HomeworkApplication.class, args);
+        try {
+            context.getBean(ConsoleRunner.class).run(args);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

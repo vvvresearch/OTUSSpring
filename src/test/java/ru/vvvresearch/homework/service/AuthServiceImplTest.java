@@ -8,6 +8,8 @@ import org.mockito.Mock;
 
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import ru.vvvresearch.homework.dao.PersonDao;
 import ru.vvvresearch.homework.dao.PersonDaoFromStrings;
 import ru.vvvresearch.homework.domain.Person;
@@ -18,9 +20,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-
+@SpringBootTest
 class AuthServiceImplTest {
     PersonDao personDao;
+    @Autowired
     AuthService authService;
     Person person;
 
@@ -28,8 +31,6 @@ class AuthServiceImplTest {
     void init() {
         personDao = mock(PersonDaoFromStrings.class);
         person = new Person("Ivanov", "Ivan");
-        authService = new AuthServiceImpl(personDao);
-
     }
 
     @Test
@@ -47,7 +48,8 @@ class AuthServiceImplTest {
 
     @Test
     void getStudent() {
-        when(personDao.getPerson()).thenReturn(person);
-        assertEquals(authService.getStudent(), person);
+        authService.setAuthData("Petrov", "Petr");
+        assertEquals(authService.getStudent().getSirname(), "Petrov");
+        assertEquals(authService.getStudent().getName(), "Petr");
     }
 }

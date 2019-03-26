@@ -16,7 +16,6 @@ import java.util.Locale;
 
 @ComponentScan(basePackages = "ru.vvvresearch.homework")
 @Configuration
-@PropertySource("classpath:application.properties")
 public class BeansConfiguration {
 
     @Bean
@@ -30,8 +29,8 @@ public class BeansConfiguration {
     }
 
     @Bean
-    Locale getLocale(@Value("${locale.key}")String localeKey, @Value("${country.key}") String countryKey) {
-        return new Locale(localeKey, countryKey);
+    Locale getLocale(YamlProps yamlProps) {
+        return new Locale(yamlProps.getLocale(), yamlProps.getCountry());
     }
 
     @Bean
