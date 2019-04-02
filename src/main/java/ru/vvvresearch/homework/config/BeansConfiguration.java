@@ -13,7 +13,7 @@ import ru.vvvresearch.homework.util.SimpleMessageSource;
 
 import java.util.Locale;
 
-
+@PropertySource(value = "classpath:application.yml")
 @ComponentScan(basePackages = "ru.vvvresearch.homework")
 @Configuration
 public class BeansConfiguration {
@@ -29,8 +29,8 @@ public class BeansConfiguration {
     }
 
     @Bean
-    Locale getLocale(YamlProps yamlProps) {
-        return new Locale(yamlProps.getLocale(), yamlProps.getCountry());
+    Locale getLocale(@Value("${country}") String country, @Value("${locale}") String locale) {
+        return new Locale(country, locale );
     }
 
     @Bean
